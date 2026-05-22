@@ -1,0 +1,76 @@
+.prxctrl-settings {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 40px 40px 20px;
+}
+
+.prxctrl-wrap h2:not(:first-child) {
+    margin-top: 5rem;
+}
+
+.license-status {
+    padding: 10px;
+    border-radius: 5px;
+    background: #dc3232;
+    color: white;
+    margin-top: 7px;
+    display: block;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.license-status.active {
+    background: #46b450 !important;
+    font-weight: normal !important;
+}
+
+.license-status a {
+    color: white;
+}
+
+.prxctrl-sites table th {
+    padding: 15px 10px;
+}
+
+p.description {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+    box-shadow: 1px 1px 2px #ccc;
+}
+
+#prxctrl-save-settings-btn {
+    margin-top: 5rem;
+}
+
+.prxctrl-remove-col {
+    width: 80px !important;
+    text-align: center !important;
+}
+
+.prxctrl-status-col {
+    width: 120px !important;
+    text-align: center !important;
+}
+
+.prxctrl-sort-col {
+    width: 32px !important;
+}
+
+#prxctrl-sites-body input {
+    width: 100% !important;
+}
+
+.prxctrl-sort-handle {
+    cursor: grab;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.prxctrl-sort-handle .dashicons {
+    color: #8c8f94;
+}

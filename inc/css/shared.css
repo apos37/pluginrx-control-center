@@ -1,0 +1,12 @@
+.prxctrl-wrap h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 3rem !important;
+    color: #333;
+}
+
+.prxctrl-wrap h2 {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #333;
+}
