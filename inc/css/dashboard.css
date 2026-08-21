@@ -26,6 +26,10 @@
     gap: 5px;
 }
 
+#prxctrl-check-sites .dashicons {
+    line-height: 1 !important;
+}
+
 .prxctrl-dashboard-actions {
     display: flex;
     gap: 10px;
