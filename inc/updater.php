@@ -9,22 +9,20 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Updater {
 
-    private $args;
-    private $validator;
-    private $svn_path;
-    private $license_key;
-    private $cache_key;
+    private array $args;
+    private string $svn_path;
+    private string $cache_key;
     
 
     /**
      * Constructor
+     * 
+     * @param array $args
      */
-    public function __construct( $args, $validator ) {
+    public function __construct( $args ) {
 
         $this->args = $args;
-        $this->validator = $validator;
         $this->svn_path = $args[ 'author_uri' ] . 'wp-content/svn/' . $this->args[ 'text_domain' ] . '/';
-        $this->license_key = $validator->license_key;
         $this->cache_key = $args[ 'prefix' ] . '_update_check';
 
         // Hooks for update checking
@@ -50,7 +48,7 @@ class Updater {
 
         if ( false === $transient || ! isset( $transient->fetched_at ) || ( $now - $transient->fetched_at ) > $cache_stale ) {
 
-            $info_path = $this->args[ 'author_uri' ] . 'wp-content/svn/info.php?plugin=' . $this->args[ 'text_domain' ] . '&license=' . $this->license_key . '&site=' . home_url();
+            $info_path = $this->args[ 'author_uri' ] . 'wp-content/svn/info.php?plugin=' . $this->args[ 'text_domain' ] . '&site=' . home_url();
             $remote = wp_remote_get( $info_path, [
                 'timeout' => 15,
                 'headers' => [ 'Accept' => 'application/json' ]
@@ -140,6 +138,7 @@ class Updater {
         $res->requires = $remote->requires;
         $res->requires_php = $remote->requires_php;
         $res->last_updated = $remote->last_updated;
+        $res->license_required = $remote->license_required ?? true;
 
         $res->sections = [
             'description' => $remote->sections->description,
@@ -167,22 +166,11 @@ class Updater {
      * @return object
      */
     public function pre_check( $transient ) {
-        // Block updates if license is invalid
-        if ( ! $this->validator->has_valid_license() ) {
-            if ( $this->license_key ) {
-                add_action( 'admin_notices', [ $this, 'license_update_notice' ] );
-            }
-
-            if ( isset( $transient->response[ $this->args[ 'basename' ] ] ) ) {
-                unset( $transient->response[ $this->args[ 'basename' ] ] );
-            }
-
-            return $transient;
-        }
-
         $remote = $this->request();
         if ( ! $remote ) {
-            error_log( $this->args[ 'name' ] . ': No remote update info received.', 0 ); // phpcs:ignore
+            if ( Bootstrap::is_test_mode() ) {
+                error_log( $this->args[ 'name' ] . ': No remote update info received.', 0 ); // phpcs:ignore
+            }
             return $transient;
         }
 
@@ -197,30 +185,22 @@ class Updater {
             version_compare( PHP_VERSION, $requires_php, '>=' ) ) {
 
             $transient->response[ $this->args[ 'basename' ] ] = $this->prepare( $remote );
-            // error_log( $this->args[ 'name' ] . ': Update available: ' . $remote_version, 0 ); // phpcs:ignore
-
+            if ( Bootstrap::is_test_mode() ) {
+                error_log( $this->args[ 'name' ] . ': Update available: ' . $remote_version, 0 ); // phpcs:ignore
+            }
+        } else {
+            if ( Bootstrap::is_test_mode() ) {
+                error_log( $this->args[ 'name' ] . ': No update needed. Current version: ' . $current_version . ', Remote version: ' . $remote_version, 0 ); // phpcs:ignore
+            }
         }
         return $transient;
     } // End pre_check()
 
 
     /**
-     * License update notice
-     *
-     * @return void
-     */
-    public function license_update_notice() {
-        echo '<div class="notice notice-error"><p>' . wp_kses( sprintf( __( 'Plugin updates are disabled because your %1$s license is invalid. Please enter a valid license key in the <a href="%2$s">settings</a>.', 'pluginrx-control-center' ),
-                esc_html( $this->args[ 'name' ] ),
-                esc_url( $this->args[ 'settings_url' ] )
-            ), [ 'a' => [ 'href' => [], 'target' => [] ] ] ) . '</p></div>';
-    } // license_update_notice()
-
-
-    /**
      * Purge the cache after a successful plugin update
      *
-     * @param [type] $upgrader
+     * @param \WP_Upgrader $upgrader
      * @param array $options
      * @return void
      */
@@ -244,13 +224,13 @@ class Updater {
      * @return object
      */
     public function filter_plugin_updates( $transient ) {
-        if ( isset( $transient->response[ $this->args['basename'] ] ) ) {
-            $remote_version = $transient->response[ $this->args['basename'] ]->new_version ?? '0.0';
-            $current_version = $this->args['version'];
+        if ( isset( $transient->response[ $this->args[ 'basename' ] ] ) ) {
+            $remote_version = $transient->response[ $this->args[ 'basename' ] ]->new_version ?? '0.0';
+            $current_version = $this->args[ 'version' ];
 
             // Only remove if current version is >= remote version
             if ( version_compare( $current_version, $remote_version, '>=' ) ) {
-                unset( $transient->response[ $this->args['basename'] ] );
+                unset( $transient->response[ $this->args[ 'basename' ] ] );
             }
         }
         return $transient;

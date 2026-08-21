@@ -2,9 +2,9 @@
 Contributors: apos37
 Tags: site management, maintenance, updates, monitoring, logs
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.0.6
+Stable tag: 1.1.0
 License: Proprietary
 License URI: https://pluginrx.com/proprietary-license-agreement/
 
@@ -65,6 +65,9 @@ No. Communication is handled via authenticated REST API requests over HTTPS.
 3. PluginRx Agent plugin settings showing the permissions
 
 == Changelog ==
+= 1.1.0 =
+* Update: Removed license key requirement and licensing system
+* Tweak: Plugin updates now check for new versions without license validation
 
 = 1.0.6 =
 * Fix: Update broken link notifier link

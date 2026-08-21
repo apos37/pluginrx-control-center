@@ -69,11 +69,7 @@ class Dashboard {
      * Render the dashboard page
      */
 	public function render_page() {
-        if ( LicenseManager::instance()->has_been_validated() ) {
-            $sites = Database::get_sites_for_dashboard();
-        } else {
-            $sites = [];
-        }
+        $sites = Database::get_sites_for_dashboard();
 
         $is_dev_debug_tools_active = is_plugin_active( 'dev-debug-tools/dev-debug-tools.php' );
 
@@ -604,6 +600,7 @@ class Dashboard {
     /**
      * Enqueue scripts
      *
+     * @param string $hook
      * @return void
      */
     public function enqueue_scripts( $hook ) {

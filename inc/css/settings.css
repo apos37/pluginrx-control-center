@@ -8,26 +8,6 @@
     margin-top: 5rem;
 }
 
-.license-status {
-    padding: 10px;
-    border-radius: 5px;
-    background: #dc3232;
-    color: white;
-    margin-top: 7px;
-    display: block;
-    width: fit-content;
-    font-weight: bold;
-}
-
-.license-status.active {
-    background: #46b450 !important;
-    font-weight: normal !important;
-}
-
-.license-status a {
-    color: white;
-}
-
 .prxctrl-sites table th {
     padding: 15px 10px;
 }

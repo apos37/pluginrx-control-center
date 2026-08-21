@@ -64,11 +64,6 @@ class Settings {
      * @return void
      */
     public function render_page() {
-        // Licensing
-        $licensing = LicenseManager::instance();
-        $license_id = $licensing->get_license_key();
-        $license_comments = $licensing->get_license_comments();
-
         // Sites
         $sites = Database::get_sites_for_settings();
 
@@ -86,16 +81,6 @@ class Settings {
 		<h1><?php echo esc_attr( get_admin_page_title() ) ?></h1>
         <form method="post">
             <?php wp_nonce_field( $this->nonce_action, $this->nonce ); ?>
-
-            <h2><?php esc_html_e( 'License', 'pluginrx-control-center' ); ?></h2>
-            <table class="form-table" role="presentation">
-                <tbody>
-                    <tr class="prxctrl-license-id">
-                        <th scope="row"><?php echo esc_html__( 'License ID', 'pluginrx-control-center' ); ?></th>
-                        <td><input type="text" id="prxctrl-license-id" name="prxctrl_license_id" value="<?php echo esc_attr( $license_id ); ?>" style="width: 30rem;"><br><?php echo wp_kses_post( $license_comments ); ?></td>
-                    </tr>
-                </tbody>
-            </table>
             
             <h2><?php esc_html_e( 'Sites', 'pluginrx-control-center' ); ?></h2>
             <table class="form-table" role="presentation" id="prxctrl-sites-table">
@@ -296,12 +281,6 @@ class Settings {
         // Verify nonce
         if ( ! isset( $_POST[ $this->nonce ] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $this->nonce ] ) ), $this->nonce_action ) ) {
             return;
-        }
-
-        // License ID
-        if ( isset( $_POST[ 'prxctrl_license_id' ] ) ) {
-            $license_id = sanitize_text_field( wp_unslash( $_POST[ 'prxctrl_license_id' ] ) );
-            update_option( 'prxctrl_license_id', $license_id, false );
         }
 
         // Timeout
