@@ -1,0 +1,52 @@
+/* PluginRx Control Center: Logs page */
+
+.prxctrl-logs .tablenav .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.prxctrl-logs .tablenav.top {
+    height: auto;
+}
+
+.prxctrl-logs .column-created_at {
+    width: 160px;
+}
+
+.prxctrl-logs .column-status {
+    width: 100px;
+}
+
+.prxctrl-logs .column-site_id,
+.prxctrl-logs .column-action,
+.prxctrl-logs .column-context {
+    width: 13%;
+}
+
+.prxctrl-logs .column-user_id {
+    width: 200px;
+}
+
+/* #the-list beats the core rule that removes shadows from the last row */
+.prxctrl-logs #the-list tr.prxctrl-log-error > :first-child {
+    box-shadow: inset 4px 0 0 #f04438;
+}
+
+.prxctrl-log-search {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+#prxctrl-subheader .prxctrl-log-search a.prxctrl-button {
+    text-decoration: none;
+}
+
+.prxctrl-log-details {
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 120px;
+    overflow: auto;
+}

@@ -1,0 +1,85 @@
+/* PluginRx Control Center: Setup */
+
+.prxctrl-starter-box {
+    max-width: 900px;
+    margin: 10px auto 0;
+}
+
+.prxctrl-starter-box .prxctrl-box-body {
+    padding: 32px;
+    gap: 24px;
+}
+
+.prxctrl-starter-title {
+    margin: 0 !important;
+    font-size: 24px !important;
+    font-weight: 600;
+}
+
+.prxctrl-starter-intro {
+    margin: 0;
+    font-size: 15px;
+    color: #475467;
+    max-width: 720px;
+}
+
+.prxctrl-starter-step {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prxctrl-starter-step[hidden] {
+    display: none;
+}
+
+.prxctrl-starter-step legend {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1d2939;
+    margin-bottom: 12px;
+}
+
+/* Larger role cards on the setup page */
+
+.prxctrl-mode-options-large .prxctrl-mode-card {
+    padding: 22px 16px;
+    gap: 8px;
+    border-radius: 12px;
+}
+
+.prxctrl-mode-options-large .prxctrl-mode-card .dashicons {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+}
+
+.prxctrl-mode-options-large .prxctrl-mode-card strong {
+    font-size: 16px;
+}
+
+.prxctrl-mode-options-large .prxctrl-mode-option input:checked + .prxctrl-mode-card {
+    padding: 21px 15px;
+}
+
+.prxctrl-mode-desc {
+    font-size: 13px;
+    color: #475467;
+    line-height: 1.5;
+}
+
+.prxctrl-starter-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.prxctrl-starter .prxctrl-checkboxes {
+    max-height: 260px;
+    overflow: auto;
+    border: 1px solid var( --prxctrl-border );
+    border-radius: 6px;
+    padding: 10px;
+}

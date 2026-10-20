@@ -1,0 +1,173 @@
+/* PluginRx Control Center: Settings */
+
+.prxctrl-settings .prxctrl-widget-manager {
+    margin-bottom: 24px;
+}
+
+/* Link fields */
+
+.prxctrl-link-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.prxctrl-link-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f9fafb;
+    border: 1px solid var( --prxctrl-border );
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+
+.prxctrl-link-field input {
+    border: 1px solid #d0d5dd;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    flex: 1 1 140px;
+    min-width: 100px;
+}
+
+.prxctrl-link-field input[readonly] {
+    background: #f2f4f7;
+    color: #475467;
+    cursor: not-allowed;
+}
+
+.prxctrl-link-field input[aria-invalid="true"] {
+    border-color: var( --prxctrl-error );
+    box-shadow: 0 0 0 2px rgba( 180, 35, 24, .15 );
+}
+
+.prxctrl-link-handle {
+    cursor: move;
+    color: #98a2b3;
+}
+
+.prxctrl-link-remove {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: #d63638;
+    padding: 2px;
+    line-height: 1;
+}
+
+#prxctrl-add-link-field {
+    width: fit-content;
+}
+
+/* Permissions */
+
+.prxctrl-permissions-box {
+    grid-row: span 3;
+}
+
+.prxctrl-permission-group {
+    border: 1px solid var( --prxctrl-border );
+    border-radius: 8px;
+    padding: 12px 16px 16px;
+    margin: 0;
+}
+
+.prxctrl-permission-group legend {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0 6px;
+}
+
+.prxctrl-select-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.prxctrl-permission-groups {
+    display: grid;
+    grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+    gap: 20px;
+    align-items: start;
+}
+
+@media ( max-width: 960px ) {
+    .prxctrl-permission-groups {
+        grid-template-columns: 1fr;
+    }
+}
+
+.prxctrl-permission-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.prxctrl-permission {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.prxctrl-permission:hover {
+    background: #f9fafb;
+}
+
+.prxctrl-permission input {
+    margin-top: 2px;
+}
+
+/* Widget manager */
+
+.prxctrl-preview .prxctrl-site {
+    margin: 0;
+    box-shadow: none;
+    border: 1px dashed #d0d5dd;
+}
+
+.prxctrl-widget-board .prxctrl-widget,
+.prxctrl-widget-tray .prxctrl-widget {
+    cursor: move;
+}
+
+.prxctrl-widget-handle {
+    color: #98a2b3;
+}
+
+.prxctrl-tray-title {
+    margin: 4px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.prxctrl-widget-tray {
+    min-height: 70px;
+    border: 2px dashed #d0d5dd;
+    border-radius: 8px;
+    padding: 12px;
+    background: #f9fafb;
+}
+
+.prxctrl-widget-tray .prxctrl-widget {
+    opacity: .75;
+}
+
+.prxctrl-tray-empty {
+    margin: 0;
+    align-self: center;
+    grid-column: 1 / -1;
+}
+
+.prxctrl-widget-placeholder {
+    border: 2px dashed var( --prxctrl-color-accent );
+    border-radius: 8px;
+    background: #f0f9ff;
+    min-height: 60px;
+    visibility: visible !important;
+}
+

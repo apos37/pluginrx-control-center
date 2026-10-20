@@ -1,0 +1,187 @@
+/* PluginRx Control Center: Sites page */
+
+.prxctrl-sort-note {
+    margin: 0 0 12px;
+    color: var( --prxctrl-muted );
+}
+
+.prxctrl-sites-table {
+    border-radius: 6px;
+}
+
+.prxctrl-sites-table .column-handle {
+    width: 32px;
+    text-align: center;
+}
+
+.prxctrl-sites-table .column-connection {
+    width: 22%;
+}
+
+.prxctrl-sites-table .column-checked {
+    width: 15%;
+}
+
+.prxctrl-sites-table .column-actions {
+    width: 22%;
+}
+
+.prxctrl-sites-table .prxctrl-row-url {
+    word-break: break-all;
+}
+
+.prxctrl-sites-table tr.prxctrl-group-row td {
+    background: #f2f4f7 !important;
+    background-clip: padding-box;
+    border-top: 0 solid #fff;
+    height: 58px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    vertical-align: middle;
+}
+
+.prxctrl-sites-table tbody.prxctrl-group-body + tbody.prxctrl-group-body tr.prxctrl-group-row td {
+    border-top-width: 16px;
+}
+
+.prxctrl-sites-table tr.prxctrl-site-row td {
+    height: 58px;
+    vertical-align: middle;
+}
+
+.prxctrl-sites-table tr.prxctrl-site-row td.column-primary {
+    padding-left: 32px;
+}
+
+.prxctrl-sites-table tr.prxctrl-site-row > td:first-child {
+    box-shadow: inset 3px 0 0 #d0d5dd;
+}
+
+.prxctrl-sites-table tr.prxctrl-group-row .dashicons {
+    color: #667085;
+    vertical-align: middle;
+}
+
+.prxctrl-sites-table tr.prxctrl-group-row .count {
+    color: var( --prxctrl-muted );
+}
+
+.prxctrl-sites-table tr.prxctrl-group-row.is-ungrouped td {
+    background: #f9fafb !important;
+}
+
+.prxctrl-sites-table .prxctrl-site-handle,
+.prxctrl-sites-table .prxctrl-group-handle {
+    cursor: move;
+    color: #98a2b3;
+}
+
+.prxctrl-sites-table tr.prxctrl-site-row:hover .row-actions,
+.prxctrl-sites-table tr.prxctrl-site-row:focus-within .row-actions {
+    position: static;
+    left: auto;
+}
+
+.prxctrl-sites-table tr.prxctrl-site-row.is-new td:first-child,
+.prxctrl-sites-table tr.prxctrl-site-row.is-new td.column-primary {
+    box-shadow: inset 4px 0 0 var( --prxctrl-color-accent );
+}
+
+.prxctrl-sites-table tr[aria-invalid="true"] td {
+    background: var( --prxctrl-error-bg ) !important;
+}
+
+.prxctrl-connection {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+}
+
+.prxctrl-connection-ok > .dashicons {
+    color: var( --prxctrl-ok );
+}
+
+.prxctrl-connection-error > .dashicons {
+    color: var( --prxctrl-error );
+}
+
+.prxctrl-connection-error .prxctrl-connection-text {
+    font-weight: 600;
+    color: var( --prxctrl-error );
+}
+
+.prxctrl-connection-error-text,
+.prxctrl-connection-error {
+    flex-basis: 100%;
+    font-size: 12px;
+    color: var( --prxctrl-error );
+}
+
+.prxctrl-log-link {
+    font-size: 12px;
+}
+
+.prxctrl-row-placeholder td {
+    height: 40px;
+    background: #f0f9ff;
+    border: 2px dashed var( --prxctrl-color-accent );
+}
+
+.prxctrl-modal-check {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.prxctrl-group-sites-list {
+    max-height: 260px;
+    overflow: auto;
+    grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+    border: 1px solid var( --prxctrl-border );
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.prxctrl-key-field[hidden] {
+    display: none;
+}
+
+@media ( max-width: 782px ) {
+    .prxctrl-sites-table thead,
+    .prxctrl-sites-table td.column-handle {
+        display: none !important;
+    }
+
+    .prxctrl-sites-table tr.prxctrl-group-row,
+    .prxctrl-sites-table tr.prxctrl-site-row {
+        display: block;
+    }
+
+    .prxctrl-sites-table tr.prxctrl-group-row td,
+    .prxctrl-sites-table tr.prxctrl-site-row td {
+        display: block !important;
+        width: auto !important;
+        padding: 6px 12px !important;
+    }
+
+    .prxctrl-sites-table tr.prxctrl-site-row td[data-colname]::before {
+        content: attr( data-colname );
+        position: static !important;
+        width: auto !important;
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: #667085;
+    }
+
+    .prxctrl-sites-table .row-actions {
+        position: static;
+        left: auto;
+    }
+}
+
+#prxctrl-site-new-group {
+    margin-top: 8px;
+}
