@@ -185,3 +185,11 @@
 #prxctrl-site-new-group {
     margin-top: 8px;
 }
+
+tbody.prxctrl-group-body[data-group-id="0"]:not(:has(tr.prxctrl-site-row)) {
+    display: none;
+}
+
+tbody.prxctrl-group-body[data-group-id="0"]:not(:has(tr.prxctrl-site-row)) + tbody.prxctrl-group-body tr.prxctrl-group-row td {
+    border-top-width: 0;
+}

@@ -102,17 +102,21 @@ No. Communication uses the WordPress REST API.
 
 == Screenshots ==
 
-1. The Control Center dashboard with sites in groups
-2. Checking all sites
-3. The Sites page with groups and connection checks
-4. Adding a site
-5. Host settings with the Widget Manager
-6. Agent settings with permissions
-7. Logs
+1. Choose your site role
+2. The Control Center dashboard with sites in groups
+3. Checking all sites
+4. The Sites page with groups and connection checks
+5. Adding a site
+6. All host settings with the Widget Manager
+7. All agent settings with permissions
+8. Logs
 
 == Changelog ==
 = 2.0.0.1 =
 * Fix: Site thumbnails showed the "generating" placeholder instead of the screenshot after a site was checked. A new screenshot is now only used once it has finished rendering, and the last good one stays until then.
+* Fix: Connection checks failed with "unexpected response" on sites where the REST API only works through ?rest_route= (plain permalinks). The Control Center now retries that way before reporting an error.
+* Fix: Choosing "Both" during setup did not add the current site to the Sites list.
+* Tweak: The Sites page no longer shows an empty "No Group" row or extra space above the first group.
 
 = 2.0.0 =
 * New: PluginRx Control Center and PluginRx Agent are now one plugin. Choose Host, Agent or Both during setup, and switch any time in Settings.

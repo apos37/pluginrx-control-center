@@ -312,9 +312,13 @@ class Client {
 
             $result = self::send( self::rest_url( (string) $site->site_url, $route, $plain ), self::args( $headers, $json ) );
 
-            if ( ! is_wp_error( $result ) || 'not_json_404' !== $result->get_error_code() ) {
+            if ( ! is_wp_error( $result ) || ! in_array( $result->get_error_code(), [ 'not_json_404', 'invalid_response' ], true ) ) {
                 return $result;
             }
+        }
+
+        if ( is_wp_error( $result ) && 'invalid_response' === $result->get_error_code() ) {
+            return $result;
         }
 
         return new \WP_Error( 'rest_no_route', __( 'The REST route was not found.', 'pluginrx-control-center' ) );
@@ -341,9 +345,13 @@ class Client {
         foreach ( [ false, true ] as $plain ) {
             $result = self::send( self::rest_url( (string) $site->site_url, $route, $plain ), self::args( $headers, $body ) );
 
-            if ( ! is_wp_error( $result ) || 'not_json_404' !== $result->get_error_code() ) {
+            if ( ! is_wp_error( $result ) || ! in_array( $result->get_error_code(), [ 'not_json_404', 'invalid_response' ], true ) ) {
                 return $result;
             }
+        }
+
+        if ( is_wp_error( $result ) && 'invalid_response' === $result->get_error_code() ) {
+            return $result;
         }
 
         return new \WP_Error( 'rest_no_route', __( 'The REST route was not found.', 'pluginrx-control-center' ) );

@@ -284,6 +284,10 @@ class Starter {
             Mode::complete_setup();
             Database::maybe_install();
 
+            if ( Mode::has_host() && Mode::has_agent() ) {
+                Sites::add_this_site();
+            }
+
             do_action( 'prxctrl_setup_complete', $mode, false );
 
             wp_send_json_success( [ 'redirect' => Mode::has_host() ? Helpers::page_url( 'sites' ) : Helpers::page_url( 'settings', [ 'tab' => 'agent' ] ) ] );
