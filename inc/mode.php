@@ -24,6 +24,7 @@ class Mode {
 
     /**
      * Version that last required the starter page.
+     * Don't change this unless you need to trigger the starter page for a new setup version.
      */
     public const SETUP_VERSION = '2.0.0';
 

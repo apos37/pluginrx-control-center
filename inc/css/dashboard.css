@@ -734,6 +734,10 @@
     visibility: hidden;
 }
 
+.prxctrl-site.is-checking .prxctrl-warning-pill {
+    display: none;
+}
+
 .prxctrl-site.is-checking .prxctrl-widget::after {
     content: "";
     position: absolute;

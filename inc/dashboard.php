@@ -670,7 +670,6 @@ class Dashboard {
             'last_checked'   => $now,
             'permissions'    => self::permissions_from_data( $data ),
             'agent_version'  => isset( $meta[ 'version' ] ) ? sanitize_text_field( (string) $meta[ 'version' ] ) : '',
-            'screenshot_ver' => time(),
             'other'          => [
                 'login_ready'    => ! empty( $meta[ 'login_ready' ] ),
                 'require_signed' => ! empty( $meta[ 'require_signed' ] ),
@@ -685,6 +684,7 @@ class Dashboard {
 
         Database::update_site( $site_id, $update );
         Database::save_details( $site_id, $data );
+        set_transient( 'prxctrl_shot_' . $site_id, time(), DAY_IN_SECONDS );
 
         if ( Options::get( 'log_checks' ) ) {
             Database::log( $site_id, 'check_site', true, 'host', __( 'Site checked.', 'pluginrx-control-center' ) );
@@ -914,9 +914,16 @@ class Dashboard {
         Access::require_ajax();
 
         $site = self::site_or_fail( isset( $_POST[ 'site_id' ] ) ? absint( wp_unslash( $_POST[ 'site_id' ] ) ) : 0 );
-        $url = Client::screenshot_url( $site );
+        $next = (int) get_transient( 'prxctrl_shot_' . $site->id );
+        $url = Client::screenshot_url( $site, $next ? $next : null );
+        $ready = '' !== $url && Client::screenshot_ready( $url );
 
-        wp_send_json_success( [ 'ready' => '' !== $url && Client::screenshot_ready( $url ), 'url' => $url ] );
+        if ( $ready && $next ) {
+            Database::update_site( (int) $site->id, [ 'screenshot_ver' => $next ] );
+            delete_transient( 'prxctrl_shot_' . $site->id );
+        }
+
+        wp_send_json_success( [ 'ready' => $ready, 'url' => $url ] );
     } // End ajax_screenshot_ready()
 
 } // End class Dashboard

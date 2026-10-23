@@ -145,6 +145,10 @@ class Client {
         $result = self::call_v1( $site, 'ping' === $endpoint ? 'request' : $endpoint, $body );
 
         if ( is_wp_error( $result ) && 'rest_no_route' === $result->get_error_code() ) {
+            if ( ! $skip_v2 ) {
+                return new \WP_Error( 'agent_not_found', __( 'Neither the signed route (prx-agent/v2) nor the legacy route (prx-agent/v1) was found on this site.', 'pluginrx-control-center' ), [ 'hint' => __( 'Check that PluginRx Control Center 2.0 or newer is active there with the role Agent or Both. If it is, a security plugin, firewall or REST API restriction is probably blocking /wp-json/prx-agent/v2/. Allow the prx-agent namespace, or turn off Require Signed Requests on that site.', 'pluginrx-control-center' ) ] );
+            }
+
             return new \WP_Error( 'agent_not_found', __( 'The PluginRx agent was not found at this URL.', 'pluginrx-control-center' ), [ 'hint' => __( 'Make sure PluginRx Control Center is active on that site and its role is Agent or Both.', 'pluginrx-control-center' ) ] );
         }
 
@@ -524,17 +528,19 @@ class Client {
      * screenshot service is never asked to start over while it is still rendering.
      *
      * @param object $site
+     * @param int|null $version Version
      * @return string
      */
-    public static function screenshot_url( object $site ) : string {
+    public static function screenshot_url( object $site, ?int $version = null ) : string {
         if ( ! Options::get( 'screenshots' ) || empty( $site->site_url ) ) {
             return '';
         }
 
         $target = trailingslashit( (string) $site->site_url );
+        $version = null !== $version ? $version : (int) ( $site->screenshot_ver ?? 0 );
 
-        if ( ! empty( $site->screenshot_ver ) ) {
-            $target = add_query_arg( 'prxctrl', (int) $site->screenshot_ver, $target );
+        if ( $version ) {
+            $target = add_query_arg( 'prxctrl', $version, $target );
         }
 
         $url = self::MSHOTS . rawurlencode( $target ) . '?w=400&h=300';

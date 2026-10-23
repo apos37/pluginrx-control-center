@@ -3,7 +3,7 @@
  * Plugin Name:         PluginRx Control Center
  * Plugin URI:          https://pluginrx.com/plugin/pluginrx-control-center/
  * Description:         Manage and monitor all of your WordPress sites from one dashboard. Install it on every site, then choose whether each site is a Host, an Agent, or Both.
- * Version:             2.0.0
+ * Version:             2.0.0.1
  * Requires at least:   6.2
  * Requires PHP:        8.0
  * Author:              PluginRx
