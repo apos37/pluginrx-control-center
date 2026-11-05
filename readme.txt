@@ -71,6 +71,15 @@ This plugin connects to the following services. No personal data is sent.
 
 The Control Center also connects to the sites you add, and agents only respond to Control Centers you allow. Those are your own sites, not third-party services.
 
+= For developers =
+
+Actions and filters are available on our [developer docs](https://pluginrx.com/docs/plugin/pluginrx-control-center/).
+
+= More from PluginRx =
+
+See our other free plugins on [WordPress.org](https://profiles.wordpress.org/apos37/#content-plugins) or at [pluginrx.com](https://pluginrx.com/).
+
+
 == Installation ==
 
 1. Install and activate the plugin on every site you want to manage, including the site that will run the Control Center.
@@ -99,6 +108,10 @@ Administrators always have access. You can give other roles access to the Dashbo
 = Does this use XML-RPC? =
 
 No. Communication uses the WordPress REST API.
+
+= Where can I request features and get further support? =
+
+We recommend using our [website support forum](https://pluginrx.com/support/plugin/clear-cache-everywhere/) as the primary method for requesting features and getting help. You can also reach out via our [Discord support server](https://discord.gg/3HnzNEJVnR) or the [WordPress.org support forum](https://wordpress.org/support/plugin/clear-cache-everywhere/), but please note that WordPress.org doesn’t always notify us of new posts, so it’s not ideal for time-sensitive issues.
 
 == Screenshots ==
 
